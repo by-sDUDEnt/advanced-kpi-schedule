@@ -1,6 +1,6 @@
-import './App.css';
+import '../App.css';
 import { useEffect, useState } from 'react';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from '../reportWebVitals';
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,9 +18,6 @@ function App() {
           setIsLoaded(true);
           setItems(result["data"]["scheduleFirstWeek"]  );
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true);
           setError(error);
@@ -29,7 +26,7 @@ function App() {
   }, [])
 
 
-
+// REDO INTO COMPONENTS PASSING PROPS
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -38,13 +35,10 @@ function App() {
   } else {
     return (
       <div>
-        {/* {reportWebVitals(console.log(items.map(day=> day.pairs)))} */}
         {items.map(day => (
               <div>
-                
                 <div>{day["day"]}</div>
                 <ul>{day["pairs"].map(pair =>  <li>{pair.time} {pair.name}</li>)}</ul>
-                
               </div>
             ))}
       </div>
